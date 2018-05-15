@@ -37,4 +37,4 @@ class Genre
     @songs.each {|s| artists << s.artist if !artists.include?(s.artist) }
     artists
   end
-end 
+end
