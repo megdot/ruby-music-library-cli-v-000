@@ -4,7 +4,7 @@ class MusicImporter
 
   def initialize(path)
     @path = path
-  end 
+  end
 
   def files
     Dir.entries(path).select {|file| file.end_with?(".mp3")}
@@ -12,6 +12,6 @@ class MusicImporter
 
   def import
     files.each {|file| Song.new_from_filename(file)}
-  end  
+  end
 
 end  
