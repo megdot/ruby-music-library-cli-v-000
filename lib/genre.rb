@@ -1,4 +1,5 @@
 class Genre
+  
   attr_accessor :name, :songs
   extend Concerns::Findable
 
@@ -37,4 +38,5 @@ class Genre
     @songs.each {|s| artists << s.artist if !artists.include?(s.artist) }
     artists
   end
+  
 end
