@@ -1,5 +1,4 @@
 class MusicImporter
-
   attr_accessor :path
 
   def initialize(path)
@@ -7,11 +6,11 @@ class MusicImporter
   end
 
   def files
-    Dir.entries(path).select {|file| file.end_with?(".mp3")}
+    Dir.entries(@path).reject {|f| !f.include?(".mp3")}
   end
 
   def import
-    files.each {|file| Song.new_from_filename(file)}
+    files.each {|file| Song.create_from_filename(file)}
   end
 
-end  
+end
