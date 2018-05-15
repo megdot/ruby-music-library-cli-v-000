@@ -1,39 +1,39 @@
 class Genre
+
   extend Concerns::Findable
-  attr_accessor :name
-  attr_reader :songs
+  
+  attr_accessor :name, :songs
 
   @@all = []
 
   def initialize(name)
     @name = name
     @songs = []
-  end
+    save
+  end 
+
+  def save
+    @@all << self
+  end  
 
   def self.all
     @@all
   end
 
   def self.destroy_all
-    all.clear
-  end
-
-  def save
-    @@all << self
-  end
+    @@all.clear
+  end  
 
   def self.create(name)
-    genre = new(name)
-    genre.save
-    genre
-  end
+    Genre.new(name) 
+  end 
 
-  def artist=(artist)
-    @artist = artist
-    artist.add_song(self)
+  def add_song(song)
+    @songs << song unless @songs.include?(song)
+     song.genre = self unless song.genre == self
   end
 
   def artists
-    songs.collect(&:artist).uniq
-  end
+    self.songs.collect {|song| song.artist}.uniq
+  end  
 end
